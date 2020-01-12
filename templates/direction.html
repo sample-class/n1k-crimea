@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+
+    <h1 class="display-5 mt-4">Летим из {{ meta_departure.departure }}</h1>
+    {% if meta_departure.count_tours == 0 %}
+        <p class="mb-4">В данный момент туры из данного пункта отсутствуют. Загляните позже<p>
+    {% else %}
+        <p class="mb-4">Найдено {{ meta_departure.count_tours }} {{ meta_departure.ending }}, от {{ meta_departure.min_price }} до {{ meta_departure.max_price }} и от {{ meta_departure.min_nights.count }} {{ meta_departure.min_nights.ending }} до {{ meta_departure.max_nights.count }} {{ meta_departure.max_nights.ending }}</p>
+        <!-- HERO -->
+
+        <!-- CARDS -->
+
+        <div class="row mt-5">
+            {% for tour_id, tour_val in tours_direction.items() %}
+            <div class="col-4">
+                <div class="card mb-3" >
+                <img src="{{ tour_val.picture }}" class="card-img-top my_img_card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ tour_val.title }}</h5>
+                 <p class="card-text">{{ tour_val.description|truncate(60) }}</p>
+                    <a href="/tour/{{ tour_id }}" class="btn btn-sm btn-primary">Подробнее</a>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    {% endif %}
+
+{% endblock %}

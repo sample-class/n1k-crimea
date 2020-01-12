@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+    <!-- HERO -->
+
+    <div class="jumbotron text-center mt-4">
+      <h1 class="display-4">{{meta_data.title}}</h1>
+      <p class="lead">{{meta_data.subtitle}}</p>
+      <p class="mt-5 w-50 mx-auto">{{meta_data.desc}}</p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="row mt-5">
+        {% for tour_id, tour_val in tours.items() %}
+        <div class="col-4">
+            <div class="card mb-3" >
+                <img src="{{ tour_val.picture }}" class="card-img-top my_img_card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ tour_val.title }}</h5>
+                    <p class="card-text">{{ tour_val.description|truncate(60) }}</p>
+                    <a href="/tour/{{ tour_id }}" class="btn btn-sm btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
